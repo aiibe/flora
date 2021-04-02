@@ -1,5 +1,4 @@
 <script>
-	// import Logo from './Logo.svelte'
 	export let segment;
 </script>
 
