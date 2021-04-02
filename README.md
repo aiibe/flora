@@ -15,7 +15,7 @@ A boilerplate for Sapper and FaunaDB hosted by Vercel
 
 ```javascript
 npm install
-npm run dev // or sapper dev
+npm run dev
 ```
 
 ## Production
