@@ -1,4 +1,4 @@
-require('dotenv').config()
+import 'dotenv/config'
 
 import sirv from 'sirv'
 import polka from 'polka'
