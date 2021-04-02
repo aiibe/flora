@@ -1,3 +1,13 @@
 # Flora
 
-Boilerplate for Sapper and FaunaDB
+A boilerplate for Sapper and FaunaDB
+
+## Included
+
+- Bulma CSS
+
+## Install
+
+```javascript
+npm install
+```
