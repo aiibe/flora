@@ -2,4 +2,8 @@
 	<title>Flora</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<section class="section">
+	<div class="container">
+		<h1>Great success!</h1>
+	</div>
+</section>
