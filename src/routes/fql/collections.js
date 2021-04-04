@@ -5,7 +5,7 @@ export async function get(req, res) {
 	const { data } = await fauna.query(
 		q.Map(
 			q.Paginate(q.Collections()),
-			q.Lambda((x) => q.Get(x))
+			q.Lambda((x) => q.Select('name', q.Get(x)))
 		)
 	)
 	res.setHeader('Content-Type', 'application/json')
@@ -19,8 +19,8 @@ export async function post(req, res) {
 		return res.end(JSON.stringify({ error: { description: 'Missing data' } }))
 	// PROXY to Fauna
 	try {
-		await fauna.query(q.CreateCollection({ name }))
-		res.end(JSON.stringify({ success: true }))
+		const reply = await fauna.query(q.CreateCollection({ name }))
+		res.end(JSON.stringify({ success: true, name: reply.name }))
 	} catch (error) {
 		res.end(JSON.stringify({ error }))
 	}

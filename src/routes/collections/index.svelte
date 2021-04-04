@@ -2,17 +2,9 @@
 	<title>Flora</title>
 </svelte:head>
 
-<script context='module'>
-	export async function preload() {
-		const reply = await this.fetch('/fql/collections')
-		const { data } = await reply.json()
-		return { items: data }
-	}
-</script>
-
 <script>
 	import { goto } from '@sapper/app'
-	export let items
+	import { Collections } from '../../store'
 </script>
 
 <section class="section">
@@ -24,9 +16,9 @@
 			</div>
 		</div>
 		<div class="card-content">
-			{#if items.length > 0}
-			{#each items as item}
-			<p>{item.name}</p>
+			{#if $Collections.length > 0}
+			{#each $Collections as item}
+			<p>{item}</p>
 			{/each}
 			{:else}
 			<p class="has-text-centered">No collections</p>

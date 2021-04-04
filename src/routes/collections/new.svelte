@@ -1,26 +1,31 @@
 <script>
 	import { goto } from '@sapper/app'
-	import { notification } from '../../store'
+	import { notification, Collections } from '../../store'
 	import { onDestroy } from 'svelte';
 	let name = ''
 	let fetching = false
 
 	async function handleSubmit() {
 		fetching = true
-		const body = JSON.stringify({ name })
 		const opts = {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
-			}
+			},
+			body: JSON.stringify({ name })
 		}
-		const reply = await fetch('/fql/collections', opts, body)
-		const { error } = await reply.json()
+		const raw = await fetch('/fql/collections', { ...opts })
+		const res = await raw.json()
 		fetching = false
-		if (error) return notification.set({ type: "error", message: error.description })
 
-		// Redirect to Collections
+		// on error, flash
+		if (res.error) return notification.set({ type: "error", message: res.error.description })
+
+		// on success, update Collections
+		Collections.update(c => [...c, res.name])
+
+		// then redirect back
 		goto('/collections')
 	}
 
