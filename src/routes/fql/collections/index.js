@@ -1,4 +1,4 @@
-import { fauna, q } from '../../lib/fauna'
+import { fauna, q } from '../../../lib/fauna'
 
 // Endpoint to get all collections
 export async function get(req, res) {

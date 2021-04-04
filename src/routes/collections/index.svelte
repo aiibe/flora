@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Flora</title>
+	<title>Collections | Flora</title>
 </svelte:head>
 
 <script>
@@ -18,7 +18,7 @@
 		<div class="card-content">
 			{#if $Collections.length > 0}
 			{#each $Collections as item}
-			<p>{item}</p>
+			<p><a href="{`collections/${item}`}">{item}</a></p>
 			{/each}
 			{:else}
 			<p class="has-text-centered">No collections</p>
