@@ -21,28 +21,35 @@
 </svelte:head>
 
 <section class="section">
-	<div class="card">
-		<div class="card-header">
-			<div class="card-header-title">
-				<div class="breadcrumb" aria-label="breadcrumbs">
-					<ul>
-						<li><a href="/collections" class="is-capitalized">collections</a></li>
-						<li class="is-active"><a href="{`/${slug}`}" aria-current="page" class="is-capitalized">{slug}</a></li>
-					</ul>
+
+	<div class="breadcrumb" aria-label="breadcrumbs">
+		<ul>
+			<li><a href="/collections" class="is-capitalized">collections</a></li>
+			<li class="is-active"><a href="{`/${slug}`}" aria-current="page" class="is-capitalized">{slug}</a></li>
+		</ul>
+	</div>
+	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
+		<h1 class="title is-size-4 mb-0 is-capitalized">{slug}</h1>
+		<button class="button is-link is-small" on:click="{addItem}">ADD ITEM</button>
+	</div>
+
+	<div class="columns is-multiline">
+		{#if documents.length > 0}
+		{#each documents as item}
+		<div class="column is-one-third">
+			<div class="card mb-2">
+				<div class="card-content">
+					<pre>{JSON.stringify(item, null, 1)}</pre>
+					<a href="{`collections/${slug}`}">Edit</a>
 				</div>
 			</div>
-			<div class="card-header-icon">
-				<button class="button is-link is-small" on:click="{addItem}">ADD ITEM</button>
-			</div>
 		</div>
-		<div class="card-content">
-			{#if documents.length > 0}
-			{#each documents as item}
-			<p>{item.name}</p>
-			{/each}
-			{:else}
+		{/each}
+		{:else}
+		<tr>
 			<p class="has-text-centered">No item</p>
-			{/if}
-		</div>
+		</tr>
+		{/if}
 	</div>
+
 </section>

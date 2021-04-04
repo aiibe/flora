@@ -8,6 +8,13 @@
 </script>
 
 <section class="section">
+
+	<div class="breadcrumb" aria-label="breadcrumbs">
+		<ul>
+			<li><a href="/collections" class="is-capitalized is-size-6">collections</a></li>
+		</ul>
+	</div>
+
 	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
 		<h1 class="title is-size-4 mb-0">Collections</h1>
 		<button class="button is-link is-small" on:click="{() => goto('/collections/new')}">NEW COLLECTION</button>
