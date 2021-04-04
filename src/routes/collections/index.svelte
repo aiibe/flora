@@ -8,21 +8,29 @@
 </script>
 
 <section class="section">
-	<div class="card">
-		<div class="card-header">
-			<div class="card-header-title">Collections</div>
-			<div class="card-header-icon">
-				<button class="button is-link is-small" on:click="{() => goto('/collections/new')}">NEW COLLECTION</button>
+	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
+		<h1 class="title is-size-4 mb-0">Collections</h1>
+		<button class="button is-link is-small" on:click="{() => goto('/collections/new')}">NEW COLLECTION</button>
+	</div>
+
+	<div class="columns is-multiline">
+		{#if $Collections.length > 0}
+		{#each $Collections as item}
+		<div class="column is-one-third">
+			<div class="card mb-2">
+				<div class="card-content">
+					<p><a href="{`collections/${item}`}" class="is-capitalized ">{item}</a></p>
+					<p class="is-size-7 has-text-grey-light">/{item}</p>
+				</div>
 			</div>
 		</div>
-		<div class="card-content">
-			{#if $Collections.length > 0}
-			{#each $Collections as item}
-			<p><a href="{`collections/${item}`}">{item}</a></p>
-			{/each}
-			{:else}
+		{/each}
+		{:else}
+		<tr>
 			<p class="has-text-centered">No collections</p>
-			{/if}
-		</div>
+		</tr>
+		{/if}
 	</div>
+
+
 </section>

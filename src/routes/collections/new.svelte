@@ -35,11 +35,11 @@
 
 <section class="section">
 	<div class="columns">
-		<div class="column is-half">
+		<div class="column">
 			<div class="card">
-				<div class="card-header">
+				<!-- <div class="card-header">
 					<div class="card-header-title">New collection</div>
-				</div>
+				</div> -->
 				<div class="card-content">
 					<form on:submit|preventDefault={handleSubmit}>
 						<div class="field">
