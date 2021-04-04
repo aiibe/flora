@@ -2,7 +2,13 @@
 	export let segment;
 </script>
 
-<nav class="navbar has-shadow">
+<style>
+	nav {
+		background-color: transparent;
+	}
+</style>
+
+<nav class="navbar">
 	<div class="container">
 		<div class="navbar-brand">
 			<a href="." class="navbar-item">
