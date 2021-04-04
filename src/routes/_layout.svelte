@@ -12,10 +12,10 @@
 	export async function preload() {
 		// Need to fetch App state instead
 		console.log('Hydration')
-		// const res = await this.fetch('/fql/collections')
-		// const collections = await res.json()
+		const res = await this.fetch('/fql/collections')
+		const collections = await res.json()
 
-		const collections = { "data": ["y", "shoels", "kxms", "niscm", "ys", "y_cdos", "9328", "impo", "nuts", "Bring", "nike", "nice", "yahoo", "jimbo", "Apostrophe", "dresses", "rivers", "cards", "goods", "shoes", "flinck", "apps", "pokob", "jimmy"] }
+		// const collections = { "data": ["y", "shoels", "kxms", "niscm", "ys", "y_cdos", "9328", "impo", "nuts", "Bring", "nike", "nice", "yahoo", "jimbo", "Apostrophe", "dresses", "rivers", "cards", "goods", "shoes", "flinck", "apps", "pokob", "jimmy"] }
 		Collections.update(c => [...collections.data])
 	}
 </script>

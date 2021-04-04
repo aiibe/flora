@@ -23,7 +23,14 @@
 <section class="section">
 	<div class="card">
 		<div class="card-header">
-			<div class="card-header-title is-capitalized">{slug}</div>
+			<div class="card-header-title">
+				<div class="breadcrumb" aria-label="breadcrumbs">
+					<ul>
+						<li><a href="/collections" class="is-capitalized">collections</a></li>
+						<li class="is-active"><a href="{`/${slug}`}" aria-current="page" class="is-capitalized">{slug}</a></li>
+					</ul>
+				</div>
+			</div>
 			<div class="card-header-icon">
 				<button class="button is-link is-small" on:click="{addItem}">ADD ITEM</button>
 			</div>
