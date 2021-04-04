@@ -25,7 +25,7 @@
 <main class="container">
 	<div class="columns">
 		<div class="column is-one-quarter">
-			<Aside />
+			<Aside collections={$Collections} />
 		</div>
 		<div class="column">
 			<slot></slot>
