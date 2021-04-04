@@ -1,12 +1,31 @@
 <script>
 	import { goto } from '@sapper/app'
+	import { notification } from '../../store'
+	import { onDestroy } from 'svelte';
 	let name = ''
+	let fetching = false
 
-	function handleSubmit() {
-		// Check user input + CSRF ? 
+	async function handleSubmit() {
+		fetching = true
+		const body = JSON.stringify({ name })
+		const opts = {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			}
+		}
+		const reply = await fetch('/fql/collections', opts, body)
+		const { error } = await reply.json()
+		fetching = false
+		if (error) return notification.set({ type: "error", message: error.description })
 
-		// console.log(name)
+		// Redirect to Collections
+		goto('/collections')
 	}
+
+	// Reset Notifications before unmount
+	onDestroy(() => notification.set(null))
 </script>
 
 <section class="section">
@@ -21,7 +40,11 @@
 						<div class="field">
 							<label class="label">Name</label>
 							<div class="control">
-								<input type="text" class="input" bind:value={name} autofocus>
+								{#if $notification && $notification.type === 'error'}
+								<input type="text" class="input is-danger" bind:value={name}>
+								{:else}
+								<input type="text" class="input" bind:value={name}>
+								{/if}
 							</div>
 						</div>
 						<div class="field is-grouped is-grouped-right">
@@ -29,7 +52,11 @@
 								<a href="/collections" class="button">Cancel</a>
 							</p>
 							<p class="control">
+								{#if fetching}
+								<button class="button is-link is-loading" type="submit">Save</button>
+								{:else}
 								<button class="button is-link" type="submit">Save</button>
+								{/if}
 							</p>
 						</div>
 					</form>

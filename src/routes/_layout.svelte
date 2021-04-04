@@ -1,12 +1,13 @@
 <script>
 	import Nav from '../components/Nav.svelte';
 	import Aside from '../components/Aside.svelte';
+	import Notification from '../components/Notification.svelte'
 
 	export let segment;
 </script>
 
+<Notification />
 <Nav {segment} />
-
 <main class="container">
 	<div class="columns">
 		<div class="column is-one-quarter">
