@@ -1,11 +1,11 @@
 <script context="module">
 	export async function preload(page) {
-		const { slug } = page.params
-		// TODO check slug
-		const reply = await this.fetch(`/fql/collections/${slug}`)
+		const { collection } = page.params
+		// TODO check collection
+		const reply = await this.fetch(`/fql/collections/${collection}`)
 		const { data } = await reply.json()
 		const documents = [...data]
-		return { documents, slug }
+		return { documents, collection }
 	}
 </script>
 
@@ -14,11 +14,11 @@
 	function addItem() {
 		// TODO
 	}
-	export let documents, slug
+	export let documents, collection
 </script>
 
 <svelte:head>
-	<title>{slug} | Flora</title>
+	<title>{collection} | Flora</title>
 </svelte:head>
 
 <section class="section">
@@ -26,12 +26,16 @@
 	<div class="breadcrumb" aria-label="breadcrumbs">
 		<ul>
 			<li><a href="/collections" class="is-capitalized">collections</a></li>
-			<li class="is-active"><a href="{`/${slug}`}" aria-current="page" class="is-capitalized">{slug}</a></li>
+			<li class="is-active">
+				<a href="{`/collections/${collection}`}" aria-current="page" class="is-capitalized">{collection}</a>
+			</li>
 		</ul>
 	</div>
 	<div class="is-flex is-align-items-center mb-4">
-		<h1 class="title is-size-4 mb-0 is-capitalized">{slug}</h1>
-		<button class="button is-small ml-3 is-rounded">SETTINGS</button>
+		<h1 class="title is-size-4 mb-0 is-capitalized">{collection}</h1>
+		<button class="button is-small ml-3 is-rounded">
+			<a href="{`/collections/${collection}/settings`}">SETTINGS</a>
+		</button>
 		<button class="button is-link is-small ml-3 is-rounded" on:click="{addItem}">ADD ITEM</button>
 	</div>
 
@@ -44,7 +48,7 @@
 					<pre style="background-color: #fbfbfb;">{JSON.stringify(item, null, 1)}</pre>
 				</div>
 				<div class="card-content">
-					<a href="{`collections/${slug}`}">Edit</a>
+					<a href="{`collections/${collection}`}">Edit</a>
 				</div>
 			</div>
 		</div>

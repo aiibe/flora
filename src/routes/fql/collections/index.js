@@ -25,3 +25,31 @@ export async function post(req, res) {
 		res.end(JSON.stringify({ error }))
 	}
 }
+
+// Endpoint to update an existing collection
+export async function patch(req, res) {
+	const { name, ref } = req.body
+	if (!name || !ref)
+		return res.end(JSON.stringify({ error: { description: 'Missing data' } }))
+	// PROXY to Fauna
+	try {
+		const reply = await fauna.query(q.Update(q.Collection(ref), { name }))
+		res.end(JSON.stringify({ success: true, name: reply.name }))
+	} catch (error) {
+		res.end(JSON.stringify({ error }))
+	}
+}
+
+// Endpoint to update an existing collection
+export async function del(req, res) {
+	const { ref } = req.body
+	if (!ref)
+		return res.end(JSON.stringify({ error: { description: 'Missing data' } }))
+	// PROXY to Fauna
+	try {
+		const reply = await fauna.query(q.Delete(q.Collection(ref)))
+		res.end(JSON.stringify({ success: true, name: reply.name }))
+	} catch (error) {
+		res.end(JSON.stringify({ error }))
+	}
+}

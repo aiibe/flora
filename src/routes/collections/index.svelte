@@ -35,9 +35,9 @@
 		</div>
 		{/each}
 		{:else}
-		<tr>
+		<div class="column">
 			<p class="has-text-centered">No collections</p>
-		</tr>
+		</div>
 		{/if}
 	</div>
 

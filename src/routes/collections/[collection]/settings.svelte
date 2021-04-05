@@ -1,22 +1,33 @@
+<!-- Manage a collection -->
+
+<script context="module">
+	export async function preload(page) {
+		const { collection } = page.params
+		return { collection }
+	}
+</script>
+
 <script>
+	import { onDestroy } from 'svelte'
 	import { goto } from '@sapper/app'
-	import { notification, Collections } from '../../store'
-	import { onDestroy } from 'svelte';
-	let name = ''
+	import { notification, Collections } from '../../../store'
+	$: name = collection
 	let fetching = false
+	let deleting = false
 
 	async function handleSubmit() {
 		fetching = true
 		const opts = {
-			method: 'POST',
+			method: 'PATCH',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ name })
+			body: JSON.stringify({ name, ref: collection })
 		}
 		const raw = await fetch('/fql/collections', { ...opts })
 		const res = await raw.json()
+
 		fetching = false
 
 		// on error, flash
@@ -26,25 +37,56 @@
 		Collections.update(c => [...c, res.name])
 
 		// then redirect back
-		goto('/collections')
+		goto(`/collections/${name}`)
 	}
 
-	// Reset Notifications before unmount
+	async function handleDelete() {
+		deleting = true
+		const opts = {
+			method: 'DELETE',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ ref: collection })
+		}
+		const raw = await fetch('/fql/collections', { ...opts })
+		const res = await raw.json()
+
+		deleting = false
+
+		// on error, flash
+		if (res.error) return notification.set({ type: "error", message: res.error.description })
+
+		// on success, update Collections
+		Collections.update(c => c.filter(e => e !== res.name))
+
+		// then redirect back
+		goto(`/collections`)
+	}
+
 	onDestroy(() => notification.set(null))
+
+	export let collection
 </script>
 
 <section class="section">
-
 	<div class="breadcrumb" aria-label="breadcrumbs">
 		<ul>
-			<li><a href="/collections" class="is-capitalized is-size-6">collections</a></li>
+			<li>
+				<a href="/collections" class="is-capitalized is-size-6">collections</a>
+			</li>
+			<li>
+				<a href="{`/collections/${collection}`}" class="is-capitalized is-size-6">{collection}</a>
+			</li>
 			<li class="is-active">
-				<a href="/collections/new" aria-current="page" class="is-capitalized">new</a>
+				<a href="{`/collections/${collection}/settings`}" aria-current="page" class="is-capitalized">settings</a>
 			</li>
 		</ul>
 	</div>
+
 	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
-		<h1 class="title is-size-4 mb-0 is-capitalized">New collection</h1>
+		<h1 class="title is-size-4 mb-0">Settings</h1>
 	</div>
 
 	<div class="columns">
@@ -77,6 +119,12 @@
 					</form>
 				</div>
 			</div>
+			{#if deleting}
+			<button class="button has-text-danger mt-2 is-small is-loading">DELETE</button>
+			{:else}
+			<button class="button has-text-danger mt-2 is-small" on:click={handleDelete}>DELETE</button>
+			{/if}
 		</div>
 	</div>
+
 </section>

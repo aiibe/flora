@@ -1,5 +1,6 @@
 import { fauna, q } from '../../../lib/fauna'
 
+// Get collection's documents
 export async function get(req, res) {
 	const { slug } = req.params
 	const { data } = await fauna.query(
