@@ -22,7 +22,7 @@
 			COLLECTION</button>
 	</div>
 
-	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:50, duration: 250}}">
+	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}">
 		{#if $Collections.length > 0}
 		{#each $Collections as item}
 		<div class="column is-one-third">

@@ -39,7 +39,7 @@
 		<button class="button is-link is-small ml-3 is-rounded" on:click="{addItem}">ADD ITEM</button>
 	</div>
 
-	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:50, duration: 250}}">
+	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}">
 		{#if documents.length > 0}
 		{#each documents as item}
 		<div class="column is-one-third">
