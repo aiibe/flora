@@ -29,12 +29,13 @@
 			<li class="is-active"><a href="{`/${slug}`}" aria-current="page" class="is-capitalized">{slug}</a></li>
 		</ul>
 	</div>
-	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
+	<div class="is-flex is-align-items-center mb-4">
 		<h1 class="title is-size-4 mb-0 is-capitalized">{slug}</h1>
-		<button class="button is-link is-small" on:click="{addItem}">ADD ITEM</button>
+		<button class="button is-small ml-3 is-rounded">SETTINGS</button>
+		<button class="button is-link is-small ml-3 is-rounded" on:click="{addItem}">ADD ITEM</button>
 	</div>
 
-	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:0, duration: 250}}">
+	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:50, duration: 250}}">
 		{#if documents.length > 0}
 		{#each documents as item}
 		<div class="column is-one-third">

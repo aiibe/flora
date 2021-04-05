@@ -16,9 +16,10 @@
 		</ul>
 	</div>
 
-	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
+	<div class="is-flex is-align-items-center mb-4">
 		<h1 class="title is-size-4 mb-0">Collections</h1>
-		<button class="button is-link is-small" on:click="{() => goto('/collections/new')}">NEW COLLECTION</button>
+		<button class="button is-link is-small ml-3 is-rounded" on:click="{() => goto('/collections/new')}">NEW
+			COLLECTION</button>
 	</div>
 
 	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:50, duration: 250}}">
