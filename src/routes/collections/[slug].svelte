@@ -10,6 +10,7 @@
 </script>
 
 <script>
+	import { fly } from 'svelte/transition'
 	function addItem() {
 		// TODO
 	}
@@ -33,22 +34,24 @@
 		<button class="button is-link is-small" on:click="{addItem}">ADD ITEM</button>
 	</div>
 
-	<div class="columns is-multiline">
+	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:0, duration: 250}}">
 		{#if documents.length > 0}
 		{#each documents as item}
 		<div class="column is-one-third">
 			<div class="card mb-2">
+				<div class="card-image">
+					<pre style="background-color: #fbfbfb;">{JSON.stringify(item, null, 1)}</pre>
+				</div>
 				<div class="card-content">
-					<pre>{JSON.stringify(item, null, 1)}</pre>
 					<a href="{`collections/${slug}`}">Edit</a>
 				</div>
 			</div>
 		</div>
 		{/each}
 		{:else}
-		<tr>
-			<p class="has-text-centered">No item</p>
-		</tr>
+		<div class="column">
+			<p>No item</p>
+		</div>
 		{/if}
 	</div>
 

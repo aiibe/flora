@@ -34,6 +34,17 @@
 </script>
 
 <section class="section">
+
+	<div class="breadcrumb" aria-label="breadcrumbs">
+		<ul>
+			<li><a href="/collections" class="is-capitalized is-size-6">collections</a></li>
+			<li class="is-active"><a href="/collections/new" aria-current="page" class="is-capitalized">new</a></li>
+		</ul>
+	</div>
+	<div class="is-flex is-justify-content-space-between is-align-items-center mb-4">
+		<h1 class="title is-size-4 mb-0 is-capitalized">New collection</h1>
+	</div>
+
 	<div class="columns">
 		<div class="column">
 			<div class="card">

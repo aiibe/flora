@@ -1,8 +1,9 @@
 <svelte:head>
-	<title>Collections | Flora</title>
+	<title>New Collections | Flora</title>
 </svelte:head>
 
 <script>
+	import { fly } from 'svelte/transition'
 	import { goto } from '@sapper/app'
 	import { Collections } from '../../store'
 </script>
@@ -20,13 +21,13 @@
 		<button class="button is-link is-small" on:click="{() => goto('/collections/new')}">NEW COLLECTION</button>
 	</div>
 
-	<div class="columns is-multiline">
+	<div class="columns is-multiline" in:fly="{{y:50, duration: 250, delay: 300}}" out:fly="{{y:50, duration: 250}}">
 		{#if $Collections.length > 0}
 		{#each $Collections as item}
 		<div class="column is-one-third">
 			<div class="card mb-2">
 				<div class="card-content">
-					<p><a href="{`collections/${item}`}" class="is-capitalized ">{item}</a></p>
+					<p><a href="{`collections/${item}`}" class="is-capitalized" sapper:noscroll>{item}</a></p>
 					<p class="is-size-7 has-text-grey-light">/{item}</p>
 				</div>
 			</div>
